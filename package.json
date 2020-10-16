@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --port 5000",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -30,6 +31,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "angular-unit-test-helper": "^9.4.0",
     "codelyzer": "^6.0.0",
     "dev-norms": "1.7.1",
     "jasmine-core": "~3.6.0",
