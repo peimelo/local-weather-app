@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ICurrentWeather } from '../interfaces';
@@ -59,29 +59,29 @@ export class WeatherService implements IWeatherService {
     searchText: string,
     country?: string
   ): Observable<ICurrentWeather> {
-    return this.postalCodeService.resolvePostalCode(searchText).pipe(
-      switchMap((postalCode) => {
-        if (postalCode) {
-          return this.getCurrentWeatherByCoords({
-            latitude: postalCode.lat,
-            longitude: postalCode.lng,
-          });
-        } else {
-          let uriParams = new HttpParams();
+    // return this.postalCodeService.resolvePostalCode(searchText).pipe(
+    //   switchMap((postalCode) => {
+    //     if (postalCode) {
+    //       return this.getCurrentWeatherByCoords({
+    //         latitude: postalCode.lat,
+    //         longitude: postalCode.lng,
+    //       });
+    //     } else {
+    let uriParams = new HttpParams();
 
-          if (typeof searchText === 'string') {
-            uriParams = uriParams.set(
-              'q',
-              country ? `${searchText}, ${country}` : searchText
-            );
-          } else {
-            uriParams = uriParams.set('zip', 'search');
-          }
+    if (typeof searchText === 'string') {
+      uriParams = uriParams.set(
+        'q',
+        country ? `${searchText}, ${country}` : searchText
+      );
+    } else {
+      uriParams = uriParams.set('zip', 'search');
+    }
 
-          return this.getCurrentWeatherHelper(uriParams);
-        }
-      })
-    );
+    return this.getCurrentWeatherHelper(uriParams);
+    // }
+    // })
+    // );
   }
 
   getCurrentWeatherByCoords(coords: Coordinates): Observable<ICurrentWeather> {
