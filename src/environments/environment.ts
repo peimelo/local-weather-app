@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   appId: '99e8bcc2fd252bf4c93fd168855258df',
   baseUrl: 'http://',
+  username: 'peimelo',
+  geonamesApi: 'api',
 };
 
 /*

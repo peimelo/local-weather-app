@@ -1,6 +1,4 @@
-<div *ngIf="!current">no data</div>
-
-<div *ngIf="current">
+<div *ngIf="current$ | async as current; else loading">
   <div fxLayout="row">
     <div fxFlex="66%" class="mat-title no-margin">
       {{ current.city }}, {{ current.country }}
@@ -8,8 +6,7 @@
 
     <div fxFlex class="right mat-h3 no-margin">
       {{ current.date | date: "EEEE" }}<br />
-      {{ current.date | date: "MMM d" }}
-      {{ getOrdinal(current.date) }}
+      {{ current.date | date: "MMM d" }}{{ getOrdinal(current.date) }}
     </div>
   </div>
 
@@ -30,3 +27,5 @@
     {{ current.description }}
   </div>
 </div>
+
+<ng-template #loading>Loading...</ng-template>
